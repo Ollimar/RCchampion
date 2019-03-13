@@ -17,6 +17,10 @@ public class PersistentItems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerExp>=100f)
+        {
+            playerLevel++;
+            playerExp = 0f;
+        }
     }
 }
