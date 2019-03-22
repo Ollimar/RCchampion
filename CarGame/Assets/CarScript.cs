@@ -21,25 +21,32 @@ public class CarScript : MonoBehaviour
 
     private Rigidbody myRB;
 
+    public Transform skidmarkLeft;
+    public Transform skidmarkRight;
+
     public GameObject newTireMarkLeft;
     public GameObject activeTireMarkLeft;
     public Transform tireMarkRight;
+
+    public GameObject newTireMarkRight;
+    public GameObject activeTireMarkRight;
+    public Transform tireMarkLeft;
 
     public bool drifting = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        myGameManager = GameObject.Find("GameManager").GetComponent<MyGameManager>();
         myRB = GetComponent<Rigidbody>();
         canDrive = true;
         activeTireMarkLeft.SetActive(false);
-        myGameManager = GameObject.Find("GameManager").GetComponent<MyGameManager>();
+        activeTireMarkRight.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if(myGameManager.raceOn)
         {
             carSpeed = Mathf.Lerp(myRB.velocity.z, accelerateSpeed, Time.time);
@@ -48,16 +55,27 @@ public class CarScript : MonoBehaviour
             {
                 activeTireMarkLeft.transform.parent = null;
                 activeTireMarkLeft = null;
-                GameObject newMark = Instantiate(newTireMarkLeft, transform.position, transform.rotation);
+                GameObject newMark = Instantiate(newTireMarkLeft, skidmarkLeft.position, skidmarkLeft.rotation);
                 newMark.transform.parent = transform;
                 activeTireMarkLeft = newMark;
                 activeTireMarkLeft.SetActive(false);
+            }
+
+            else if (drifting == false && activeTireMarkRight.activeSelf)
+            {
+                activeTireMarkRight.transform.parent = null;
+                activeTireMarkRight = null;
+                GameObject newMark = Instantiate(newTireMarkRight, skidmarkRight.position, skidmarkRight.rotation);
+                newMark.transform.parent = transform;
+                activeTireMarkRight = newMark;
+                activeTireMarkRight.SetActive(false);
             }
 
             if (jsMovement.InputDirection.x != 0f)
             {
                 drifting = true;
                 activeTireMarkLeft.SetActive(true);
+                activeTireMarkRight.SetActive(true);
             }
 
             else if (jsMovement.InputDirection.x == 0f)

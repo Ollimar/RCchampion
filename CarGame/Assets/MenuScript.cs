@@ -11,7 +11,8 @@ public class MenuScript : MonoBehaviour
     public GameObject levelMenu;
     public GameObject levelPrompt;
 
-    public Text playerName;
+    public Text playerNameText;
+    public Text levelNameText;
 
     public PlayerDataScript playerData;
 
@@ -78,11 +79,12 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    public void OpenLevel()
+    public void OpenLevel(string levelName)
     {
         if (!levelPrompt.activeSelf)
         {
             levelPrompt.SetActive(true);
+            levelNameText.text = "PLAY "+levelName+"?";
         }
 
         else if (levelPrompt.activeSelf)
@@ -93,7 +95,7 @@ public class MenuScript : MonoBehaviour
 
     public void ChangeName()
     {
-        playerData.playerName = playerName.text;
+        playerData.playerName = playerNameText.text;
     }
 
     public IEnumerator StartRace(int level)

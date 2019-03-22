@@ -113,6 +113,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &36516522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36516523}
+  m_Layer: 0
+  m_Name: SkidMarkRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &36516523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36516522}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.62, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 906406814}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44288512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3793,10 +3823,15 @@ MonoBehaviour:
   crash: 0
   crashTimer: 1
   recoilTime: 1
+  skidmarkLeft: {fileID: 1894654785}
+  skidmarkRight: {fileID: 36516523}
   newTireMarkLeft: {fileID: 8054137693354333531, guid: b5e99f6293b390149bee2d933dd245d8,
     type: 3}
   activeTireMarkLeft: {fileID: 1429954158}
   tireMarkRight: {fileID: 0}
+  newTireMarkRight: {fileID: 1759500115, guid: da986217a0298fa44b699dada3968b05, type: 3}
+  activeTireMarkRight: {fileID: 1759500115}
+  tireMarkLeft: {fileID: 0}
   drifting: 0
 --- !u!54 &906406810
 Rigidbody:
@@ -3885,6 +3920,9 @@ Transform:
   m_Children:
   - {fileID: 1429954159}
   - {fileID: 941341285}
+  - {fileID: 1759500116}
+  - {fileID: 1894654785}
+  - {fileID: 36516523}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
@@ -6569,7 +6607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6431373}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6713,7 +6751,7 @@ PrefabInstance:
     - target: {fileID: 9188286962066140509, guid: b5e99f6293b390149bee2d933dd245d8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.556
       objectReference: {fileID: 0}
     - target: {fileID: 9188286962066140509, guid: b5e99f6293b390149bee2d933dd245d8,
         type: 3}
@@ -7482,10 +7520,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 85fc5266afb454943a9d8dc112522a4f, type: 3}
-    m_FontSize: 45
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 71
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -7781,6 +7819,75 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.009999999, y: 0.01, z: 0.009999999}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1759500114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 906406814}
+    m_Modifications:
+    - target: {fileID: 1759500115, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_Name
+      value: Tire (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: da986217a0298fa44b699dada3968b05, type: 3}
+--- !u!1 &1759500115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1759500115, guid: da986217a0298fa44b699dada3968b05,
+    type: 3}
+  m_PrefabInstance: {fileID: 1759500114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1759500116 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1759500116, guid: da986217a0298fa44b699dada3968b05,
+    type: 3}
+  m_PrefabInstance: {fileID: 1759500114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1767376531
 GameObject:
   m_ObjectHideFlags: 0
@@ -8039,6 +8146,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.009999999, y: 0.01, z: 0.009999999}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1894654784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1894654785}
+  m_Layer: 0
+  m_Name: SkidMarkLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1894654785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894654784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.613, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 906406814}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950322726
 GameObject:
   m_ObjectHideFlags: 0

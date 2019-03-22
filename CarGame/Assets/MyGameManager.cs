@@ -45,6 +45,9 @@ public class MyGameManager : MonoBehaviour
     // Player Data that persists between scenes
     public PlayerDataScript playerData;
 
+    // Track specific data for records
+    public Trackdata trackDataScript;
+
     // Start is called before the first frame update
     void Start()
     {       
@@ -177,6 +180,15 @@ public class MyGameManager : MonoBehaviour
             {
                 StartCoroutine("StarGet1");
             }
+
+            if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuLevel"))
+            {
+                if (timer < trackDataScript.totalRecord)
+                {
+                    currentTrack.GetComponent<Trackdata>().NewRecord(timer);
+                }
+            }
+
         }
     }
 
@@ -222,7 +234,21 @@ public class MyGameManager : MonoBehaviour
             playerDataPanel.gameObject.SetActive(true);
             playerExpMeter.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            playerData.playerExp += 50f;          
+
+            if(timer < currentTrack.GetComponent<Trackdata>().star3Time)
+            {
+                playerData.playerExp += 30f-playerData.playerLevel*0.05f;
+            }
+
+            else if (timer < currentTrack.GetComponent<Trackdata>().star2Time)
+            {
+                playerData.playerExp += 20f - playerData.playerLevel * 0.05f;
+            }
+
+            else if (timer < currentTrack.GetComponent<Trackdata>().star1Time)
+            {
+                playerData.playerExp += 10f - playerData.playerLevel * 0.05f;
+            }
         }
     }
 
