@@ -8,10 +8,12 @@ public class CarScript : MonoBehaviour
 
     public bool canDrive = false;
     public float carSpeed = 0f;
+    public float speedBoost = 5f;
     public float velocity;
     public float accelerateSpeed = 0f;
     public float rotateSpeed = 5f;
     public VJHandler jsMovement;
+    public VJHandlerAccelerate jsAccelerate;
 
     public bool crash = false;
     public float crashTimer = 3f;
@@ -63,6 +65,10 @@ public class CarScript : MonoBehaviour
                 drifting = false;
             }
 
+
+            Accelerate(jsAccelerate.InputDirection.y);
+
+
             if (crash)
             {
                 canDrive = false;
@@ -103,7 +109,7 @@ public class CarScript : MonoBehaviour
 
     public void Accelerate(float speed)
     {
-        accelerateSpeed = speed;
+        accelerateSpeed = speed* speedBoost;
     }
 
     private void OnCollisionEnter(Collision collision)

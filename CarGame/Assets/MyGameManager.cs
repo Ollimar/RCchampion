@@ -8,10 +8,13 @@ public class MyGameManager : MonoBehaviour
 {
     private CarScript racer;
 
+    public GameObject currentTrack;
+
     public int lap = 0;
 
     public bool[] checkPoints;
 
+    public bool countDownOn = false;
     public float startCountDown = 3f;
     public float timer;
     public int seconds;
@@ -22,6 +25,7 @@ public class MyGameManager : MonoBehaviour
 
     public bool raceOn = false;
     public bool resultsOn = true;
+    public bool levelChangeOn = false;
 
     // variables for UI Elements
     public Text startCountDownText;
@@ -29,38 +33,91 @@ public class MyGameManager : MonoBehaviour
     public Text lapNumberText;
     public GameObject finishPanel;
     public GameObject playerDataPanel;
+    public GameObject playerLevelUpText;
+    public Text playerLVLDataPanel;
+    public Text playerNameText;
     public Text lap1TimeText;
     public Text lap2TimeText;
     public Text lap3TimeText;
-    public Image playerExpMeter;
+    public GameObject playerExpMeter;
+    public GameObject[] stars;
 
-    public PersistentItems playerData;
+    // Player Data that persists between scenes
+    public PlayerDataScript playerData;
 
     // Start is called before the first frame update
     void Start()
-    {
-        timer = 0f;
-        raceTimeText = GameObject.Find("LapTimeText").GetComponent<Text>();
-        lapNumberText = GameObject.Find("LapText").GetComponent<Text>();
-        racer = GameObject.Find("Player1").GetComponent<CarScript>();
-        finishPanel = GameObject.Find("FinishPanel");
-        lap1TimeText = GameObject.Find("Lap1TimeText").GetComponent<Text>();
-        lap2TimeText = GameObject.Find("Lap2TimeText").GetComponent<Text>();
-        lap3TimeText = GameObject.Find("Lap3TimeText").GetComponent<Text>();
-        playerExpMeter = GameObject.Find("PlayerExpMeter").GetComponent<Image>();
-        playerDataPanel = GameObject.Find("PlayerDataUpdatePanel");
-        playerDataPanel.SetActive(false);
-        finishPanel.SetActive(false);
+    {       
+        timer                   = 0f;
+        raceTimeText            = GameObject.Find("LapTimeText").GetComponent<Text>();
+        lapNumberText           = GameObject.Find("LapText").GetComponent<Text>();
+        racer                   = GameObject.Find("Player1").GetComponent<CarScript>();
+        finishPanel             = GameObject.Find("FinishPanel");
+        lap1TimeText            = GameObject.Find("Lap1TimeText").GetComponent<Text>();
+        lap2TimeText            = GameObject.Find("Lap2TimeText").GetComponent<Text>();
+        lap3TimeText            = GameObject.Find("Lap3TimeText").GetComponent<Text>();
+        playerExpMeter          = GameObject.Find("PlayerExpMeter");
+        playerLevelUpText       = GameObject.Find("TextLevelUp");
+        playerDataPanel         = GameObject.Find("PlayerDataUpdatePanel");
+        
+
+        for (int i = 0; i<stars.Length;i++)
+        {
+            stars[i].SetActive(false);
+        }
+
         startCountDown = 3f;
         raceOn = false;
-        playerData = GameObject.Find("PlayerData").GetComponent<PersistentItems>();
+        levelChangeOn = false;
+
+
+        playerLevelUpText.SetActive(false);
+        playerDataPanel.SetActive(false);
+        finishPanel.SetActive(false);
+        startCountDownText.gameObject.SetActive(false);
+        playerExpMeter.SetActive(false);
+        playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
+        playerNameText.text = playerData.playerName;
+        StartCoroutine("StartRace");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(playerExpMeter.activeSelf)
+        {
+            playerLVLDataPanel.text = "LEVEL: "+playerData.playerLevel.ToString();
+            if (playerExpMeter.GetComponent<Image>().fillAmount < playerData.playerExp / 100f)
+            {
+                playerExpMeter.GetComponent<Image>().fillAmount += 0.5f * Time.deltaTime;
+            }
 
-        startCountDown -= Time.deltaTime;
+            if (playerExpMeter.GetComponent<Image>().fillAmount >= 1f)
+            {
+                if(!levelChangeOn)
+                {
+                    playerLevelUpText.SetActive(true);
+                    playerData.playerLevel += 1;
+                    playerLVLDataPanel.text = "LEVEL: " + playerData.playerLevel.ToString();
+                    levelChangeOn = true;
+                }
+            }
+        }
+        else if(!playerExpMeter.activeSelf)
+        {
+            playerExpMeter.GetComponent<Image>().fillAmount = playerData.playerExp / 100f;
+        }
+
+        if(levelChangeOn)
+        {
+            playerData.playerExp = 0;
+            playerExpMeter.GetComponent<Image>().fillAmount = 0f;
+        }
+
+        if (countDownOn)
+        {
+            startCountDown -= Time.deltaTime;
+        }
 
         if(startCountDown>0f)
         {
@@ -84,6 +141,7 @@ public class MyGameManager : MonoBehaviour
             //racer.canDrive = true;
             lapNumberText.GetComponent<Text>().text = lap.ToString() + "/3";
         }
+
         else if(lap >= 3)
         {
             raceOn = false;
@@ -104,6 +162,21 @@ public class MyGameManager : MonoBehaviour
             lap1TimeText.GetComponent<Text>().text = "LAP1: "+ lapTime[0].ToString();
             lap2TimeText.GetComponent<Text>().text = "LAP2: "+ lapTime[1].ToString();
             lap3TimeText.GetComponent<Text>().text = "LAP3: "+ lapTime[2].ToString();
+
+            if(timer < currentTrack.GetComponent<Trackdata>().star3Time)
+            {
+                StartCoroutine("StarGet3");
+            }
+
+            else if (timer < currentTrack.GetComponent<Trackdata>().star2Time)
+            {
+                StartCoroutine("StarGet2");
+            }
+
+            else if (timer < currentTrack.GetComponent<Trackdata>().star1Time)
+            {
+                StartCoroutine("StarGet1");
+            }
         }
     }
 
@@ -116,11 +189,21 @@ public class MyGameManager : MonoBehaviour
 
     public void Retry()
     {
+        if (playerExpMeter.GetComponent<Image>().fillAmount >= 1f)
+        {
+            playerExpMeter.GetComponent<Image>().fillAmount = 0f;
+            //playerData.playerExp = 0f;
+        }
         SceneManager.LoadScene("TestLevel");
     }
 
     public void Quit()
     {
+        if (playerExpMeter.GetComponent<Image>().fillAmount >= 1f)
+        {
+            playerExpMeter.GetComponent<Image>().fillAmount = 0f;
+            //playerData.playerExp = 0f;
+        }
         SceneManager.LoadScene("MenuLevel");
     }
 
@@ -137,9 +220,40 @@ public class MyGameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             playerDataPanel.gameObject.SetActive(true);
-            playerData.playerExp += 10f;
-            playerExpMeter.fillAmount = playerData.playerExp/100f;
+            playerExpMeter.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            playerData.playerExp += 50f;          
         }
+    }
 
+    public IEnumerator StartRace()
+    {
+        yield return new WaitForSeconds(2f);
+        startCountDownText.gameObject.SetActive(true);
+        countDownOn = true;
+    }
+
+    public IEnumerator StarGet1()
+    {
+        yield return new WaitForSeconds(1f);
+        stars[0].SetActive(true);
+    }
+
+    public IEnumerator StarGet2()
+    {
+        yield return new WaitForSeconds(0.3f);
+        stars[0].SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        stars[1].SetActive(true);
+    }
+
+    public IEnumerator StarGet3()
+    {
+        yield return new WaitForSeconds(0.3f);
+        stars[0].SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        stars[1].SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        stars[2].SetActive(true);
     }
 }

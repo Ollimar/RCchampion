@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistentItems : MonoBehaviour
+public class PlayerDataScript : MonoBehaviour
 {
     public static int money = 0;
-    public static int playerLevel = 1;
+    public int playerLevel = 1;
     public float playerExp = 0f;
+
+    public string playerName;
 
     // Start is called before the first frame update
     void Start()
@@ -17,10 +19,6 @@ public class PersistentItems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerExp>=100f)
-        {
-            playerLevel++;
-            playerExp = 0f;
-        }
+        print(playerExp);
     }
 }
