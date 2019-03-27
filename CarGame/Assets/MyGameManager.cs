@@ -55,14 +55,13 @@ public class MyGameManager : MonoBehaviour
         raceTimeText            = GameObject.Find("LapTimeText").GetComponent<Text>();
         lapNumberText           = GameObject.Find("LapText").GetComponent<Text>();
         racer                   = GameObject.Find("Player1").GetComponent<CarScript>();
-        finishPanel             = GameObject.Find("FinishPanel");
         lap1TimeText            = GameObject.Find("Lap1TimeText").GetComponent<Text>();
         lap2TimeText            = GameObject.Find("Lap2TimeText").GetComponent<Text>();
         lap3TimeText            = GameObject.Find("Lap3TimeText").GetComponent<Text>();
+        finishPanel             = GameObject.Find("FinishPanel");
         playerExpMeter          = GameObject.Find("PlayerExpMeter");
         playerLevelUpText       = GameObject.Find("TextLevelUp");
         playerDataPanel         = GameObject.Find("PlayerDataUpdatePanel");
-        
 
         for (int i = 0; i<stars.Length;i++)
         {
@@ -183,7 +182,7 @@ public class MyGameManager : MonoBehaviour
 
             if(SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MenuLevel"))
             {
-                if (timer < trackDataScript.totalRecord)
+                if (timer < currentTrack.GetComponent<Trackdata>().totalRecord)
                 {
                     currentTrack.GetComponent<Trackdata>().NewRecord(timer);
                 }

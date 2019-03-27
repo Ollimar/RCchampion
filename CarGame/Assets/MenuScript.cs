@@ -9,7 +9,9 @@ public class MenuScript : MonoBehaviour
     public GameObject mycarMenu;
     public GameObject myStatsMenu;
     public GameObject levelMenu;
-    public GameObject levelPrompt;
+    public GameObject levelPrompt1;
+    public GameObject levelPrompt2;
+    public GameObject levelPrompt3;
 
     public Text playerNameText;
     public Text levelNameText;
@@ -24,7 +26,9 @@ public class MenuScript : MonoBehaviour
         mycarMenu.SetActive(false);
         myStatsMenu.SetActive(false);
         levelMenu.SetActive(false);
-        levelPrompt.SetActive(false);
+        levelPrompt1.SetActive(false);
+        levelPrompt2.SetActive(false);
+        levelPrompt3.SetActive(false);
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
     }
 
@@ -38,7 +42,6 @@ public class MenuScript : MonoBehaviour
     {
         StartCoroutine(StartRace(levelNumber));
     }
-
 
     public void Cars()
     {
@@ -79,17 +82,48 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    public void OpenLevel(string levelName)
+    public void OpenLevel(int levelNumber)
     {
-        if (!levelPrompt.activeSelf)
+        if(levelNumber == 1)
         {
-            levelPrompt.SetActive(true);
-            levelNameText.text = "PLAY "+levelName+"?";
+            if (!levelPrompt1.activeSelf)
+            {
+                levelPrompt1.SetActive(true);
+                levelNameText.text = "PLAY ?";
+            }
+
+            else if (levelPrompt1.activeSelf)
+            {
+                levelPrompt1.SetActive(false);
+            }
         }
 
-        else if (levelPrompt.activeSelf)
+        if (levelNumber == 2)
         {
-            levelPrompt.SetActive(false);
+            if (!levelPrompt2.activeSelf)
+            {
+                levelPrompt2.SetActive(true);
+                levelNameText.text = "PLAY ?";
+            }
+
+            else if (levelPrompt2.activeSelf)
+            {
+                levelPrompt2.SetActive(false);
+            }
+        }
+
+        if (levelNumber == 3)
+        {
+            if (!levelPrompt3.activeSelf)
+            {
+                levelPrompt3.SetActive(true);
+                levelNameText.text = "PLAY ?";
+            }
+
+            else if (levelPrompt3.activeSelf)
+            {
+                levelPrompt3.SetActive(false);
+            }
         }
     }
 

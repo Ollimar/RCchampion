@@ -114,9 +114,22 @@ public class CarScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(canDrive)
+
+        /*
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 100f))
         {
-            myRB.velocity = transform.forward * carSpeed;
+            if (hit.transform.tag == "Surface")
+            {
+                transform.position = new Vector3(transform.position.x, hit.point.y + 0.2f, transform.position.z);
+                //transform.rotation = new Quaternion(hit.transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+            }
+        }
+        */
+        if (canDrive)
+        {
+            myRB.velocity = transform.up*myRB.velocity.y+transform.forward * carSpeed;
         }
 
         if(myRB.velocity.z != 0f)

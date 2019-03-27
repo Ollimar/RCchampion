@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerDataScript : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PlayerDataScript : MonoBehaviour
     public Text track2RecordText;
     public Text track3RecordText;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +30,15 @@ public class PlayerDataScript : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             playerData = gameObject;
-            track1RecordText = GameObject.Find("TextRecordTimeLevel1").GetComponent<Text>();
-            track1RecordText.text = "BEST TIME: "+track1Record.ToString();
-            track2RecordText = GameObject.Find("TextRecordTimeLevel2").GetComponent<Text>();
-            track2RecordText.text = "BEST TIME: " + track2Record.ToString();
-            track3RecordText = GameObject.Find("TextRecordTimeLevel3").GetComponent<Text>();
-            track3RecordText.text = "BEST TIME: " + track3Record.ToString();
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MenuLevel"))
+            {
+                track1RecordText = GameObject.Find("TextRecordTimeLevel1").GetComponent<Text>();
+                track1RecordText.text = "BEST TIME: " + track1Record.ToString();
+                track2RecordText = GameObject.Find("TextRecordTimeLevel2").GetComponent<Text>();
+                track2RecordText.text = "BEST TIME: " + track2Record.ToString();
+                track3RecordText = GameObject.Find("TextRecordTimeLevel3").GetComponent<Text>();
+                track3RecordText.text = "BEST TIME: " + track3Record.ToString();
+            }
         }
         else if(playerData != this)
         {

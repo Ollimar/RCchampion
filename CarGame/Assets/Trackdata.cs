@@ -31,7 +31,7 @@ public class Trackdata : MonoBehaviour
             case 2:
                 totalRecord = playerData.track2Record;
                 break;
-            default:
+            case 1:
                 totalRecord = playerData.track1Record;
                 break;
         }
