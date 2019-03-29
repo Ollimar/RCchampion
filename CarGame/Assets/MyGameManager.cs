@@ -72,7 +72,6 @@ public class MyGameManager : MonoBehaviour
         raceOn = false;
         levelChangeOn = false;
 
-
         playerLevelUpText.SetActive(false);
         playerDataPanel.SetActive(false);
         finishPanel.SetActive(false);

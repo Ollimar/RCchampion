@@ -168,6 +168,36 @@ public class CarScript : MonoBehaviour
             myGameManager.checkPoints[2] = true;
         }
 
+        if (other.gameObject.name == "CheckPoint4")
+        {
+            myGameManager.checkPoints[3] = true;
+        }
+
+        if (other.gameObject.name == "CheckPoint5")
+        {
+            myGameManager.checkPoints[4] = true;
+        }
+
+        if (other.gameObject.name == "CheckPoint6")
+        {
+            myGameManager.checkPoints[5] = true;
+        }
+
+        if (other.gameObject.name == "CheckPoint7")
+        {
+            myGameManager.checkPoints[6] = true;
+        }
+
+        if (other.gameObject.name == "CheckPoint8")
+        {
+            myGameManager.checkPoints[7] = true;
+        }
+
+        if (other.gameObject.name == "CheckPoint9")
+        {
+            myGameManager.checkPoints[8] = true;
+        }
+
         if (other.gameObject.name == "FinishLine")
         {
             if(myGameManager.checkPoints[myGameManager.checkPoints.Length-1] == true)
@@ -175,6 +205,11 @@ public class CarScript : MonoBehaviour
                 myGameManager.lapTime[myGameManager.lap-1] = myGameManager.currentLapTime;
                 myGameManager.lap++;
                 myGameManager.currentLapTime = 0f;
+                for(int i = 0; i< myGameManager.checkPoints.Length;i++)
+                {
+                    myGameManager.checkPoints[i] = false;
+                }
+                
             }
         }
     }
