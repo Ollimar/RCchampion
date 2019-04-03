@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
+  newMoney: 0
   playerLevel: 1
   playerExp: 0
   playerName: Jeff
@@ -11892,8 +11893,31 @@ PrefabInstance:
     - target: {fileID: 4491336377257039328, guid: af5cf723a7143b24faa42e88e7a13b8d,
         type: 3}
       propertyPath: m_Text
-      value: Name
+      value: Jeff
       objectReference: {fileID: 0}
+    - target: {fileID: 4491336377257039328, guid: af5cf723a7143b24faa42e88e7a13b8d,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 85fc5266afb454943a9d8dc112522a4f,
+        type: 3}
+    - target: {fileID: 4491336378543288693, guid: af5cf723a7143b24faa42e88e7a13b8d,
+        type: 3}
+      propertyPath: m_Text
+      value: asd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491336378543288693, guid: af5cf723a7143b24faa42e88e7a13b8d,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 85fc5266afb454943a9d8dc112522a4f,
+        type: 3}
+    - target: {fileID: 4491336378655226407, guid: af5cf723a7143b24faa42e88e7a13b8d,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 85fc5266afb454943a9d8dc112522a4f,
+        type: 3}
     - target: {fileID: 4491336378524349251, guid: af5cf723a7143b24faa42e88e7a13b8d,
         type: 3}
       propertyPath: m_LocalPosition.x
