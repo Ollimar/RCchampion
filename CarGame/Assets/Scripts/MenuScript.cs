@@ -9,6 +9,8 @@ public class MenuScript : MonoBehaviour
     public GameObject mycarMenu;
     public GameObject myStatsMenu;
     public GameObject levelMenu;
+    public GameObject levelMenuCloseButton;
+    public GameObject carsMenuCloseButton;
     public GameObject levelPrompt1;
     public GameObject levelPrompt2;
     public GameObject levelPrompt3;
@@ -26,6 +28,8 @@ public class MenuScript : MonoBehaviour
     {
         mycarMenu.SetActive(false);
         levelMenu.SetActive(false);
+        levelMenuCloseButton.SetActive(false);
+        carsMenuCloseButton.SetActive(false);
         levelPrompt1.SetActive(false);
         levelPrompt2.SetActive(false);
         levelPrompt3.SetActive(false);
@@ -49,12 +53,17 @@ public class MenuScript : MonoBehaviour
     {
         if(!mycarMenu.activeSelf)
         {
-            mycarMenu.SetActive(true);
+            if(!myStatsMenu.activeSelf && !levelMenu.activeSelf)
+            {
+                mycarMenu.SetActive(true);
+                carsMenuCloseButton.SetActive(true);
+            }           
         }
 
         else if (mycarMenu.activeSelf)
         {
             mycarMenu.SetActive(false);
+            carsMenuCloseButton.SetActive(false);
         }
     }
 
@@ -62,8 +71,11 @@ public class MenuScript : MonoBehaviour
     {
         if(!myStatsMenu.activeSelf)
         {
-            myStatsMenu.SetActive(true);
-            //playerMoneyText.text = playerData.money.ToString();
+            if(!mycarMenu.activeSelf && !levelMenu.activeSelf)
+            {
+                myStatsMenu.SetActive(true);
+            }
+            
         }
 
         else if (myStatsMenu.activeSelf)
@@ -77,12 +89,17 @@ public class MenuScript : MonoBehaviour
     {
         if (!levelMenu.activeSelf)
         {
-            levelMenu.SetActive(true);
+            if(!myStatsMenu.activeSelf && !mycarMenu.activeSelf)
+            {               
+                levelMenu.SetActive(true);
+                levelMenuCloseButton.SetActive(true);
+            }           
         }
 
         else if (levelMenu.activeSelf)
         {
             levelMenu.SetActive(false);
+            levelMenuCloseButton.SetActive(false);
         }
     }
 

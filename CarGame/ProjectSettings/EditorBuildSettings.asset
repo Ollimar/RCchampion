@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CarpetLevel.unity
     guid: 4840eb978fc3e1b4e8728c21f0cdff93
+  - enabled: 1
+    path: Assets/Scenes/CarGacha.unity
+    guid: 47799b4dc68ca5046a4278841176f78c
   m_configObjects: {}

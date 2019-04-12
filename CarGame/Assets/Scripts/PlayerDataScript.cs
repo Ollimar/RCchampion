@@ -15,13 +15,18 @@ public class PlayerDataScript : MonoBehaviour
 
     public string       playerName;
 
-    public float track1Record = 60f;
-    public float track2Record = 60f;
-    public float track3Record = 60f;
+    public float        track1Record = 60f;
+    public float        track2Record = 60f;
+    public float        track3Record = 60f;
 
-    public Text track1RecordText;
-    public Text track2RecordText;
-    public Text track3RecordText;
+    public Text         track1RecordText;
+    public Text         track2RecordText;
+    public Text         track3RecordText;
+
+    public bool[]       carsOwned;
+
+    public int          activeCar;
+
 
 
     // Start is called before the first frame update
