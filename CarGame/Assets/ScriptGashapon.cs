@@ -8,6 +8,8 @@ public class ScriptGashapon : MonoBehaviour
 
     public GameObject[]     cars;
 
+    public Vector3 carsOriginalPosition;
+
     public int              newCarID;
     public GameObject       newCar;
 
@@ -25,7 +27,8 @@ public class ScriptGashapon : MonoBehaviour
     {
         
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
-        cars = GameObject.FindGameObjectsWithTag("Player");
+        //cars = GameObject.FindGameObjectsWithTag("Player");
+        carsOriginalPosition = cars[0].transform.position;
 
         for(int i=0; i< cars.Length; i++)
         {
@@ -53,6 +56,7 @@ public class ScriptGashapon : MonoBehaviour
         {
             newCarWindow.SetActive(false);
             accepCarButton.SetActive(false);
+            newCar.transform.position = carsOriginalPosition;
             newCar.SetActive(false);
             buyCarButton.SetActive(true);
         }

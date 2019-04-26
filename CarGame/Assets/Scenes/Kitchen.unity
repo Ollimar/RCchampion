@@ -2236,6 +2236,16 @@ MonoBehaviour:
   activeTireMarkRight: {fileID: 1759500115}
   tireMarkLeft: {fileID: 0}
   drifting: 0
+  myMaterial: {fileID: 2100000, guid: 40f0087624d324639b8f1ce81e4f116a, type: 2}
+  skins:
+  - {fileID: 2800000, guid: 74bab085e4e3147f79b4cdea392d9654, type: 3}
+  - {fileID: 2800000, guid: db0be765f4f0f334e8adb0fe279e1286, type: 3}
+  - {fileID: 2800000, guid: 8bc074412710a79488bee72d102b0ce1, type: 3}
+  - {fileID: 2800000, guid: 022d5f08d753a3a48b089289fbeb0e38, type: 3}
+  - {fileID: 2800000, guid: 54a38484e334b83408e6886244821484, type: 3}
+  - {fileID: 2800000, guid: 0c733e69f06a6834383f63cb51ac028c, type: 3}
+  - {fileID: 2800000, guid: 4576b81d30b92dd43b2376b00c2b6323, type: 3}
+  - {fileID: 2800000, guid: e7dfcb022e3a3334e95dbf5eec041804, type: 3}
 --- !u!54 &906406810
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4813,6 +4823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plate-stack-small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012869164536, guid: 2b2f272f9ab448a429a68c3a3308d4fc, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011836274088, guid: 2b2f272f9ab448a429a68c3a3308d4fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.15
@@ -5341,6 +5355,7 @@ MonoBehaviour:
   track2RecordText: {fileID: 0}
   track3RecordText: {fileID: 0}
   carsOwned: 
+  activeCar: 0
 --- !u!4 &1906974004
 Transform:
   m_ObjectHideFlags: 0

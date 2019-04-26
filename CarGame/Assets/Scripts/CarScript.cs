@@ -34,14 +34,21 @@ public class CarScript : MonoBehaviour
 
     public bool drifting = false;
 
+    public Material     myMaterial;
+    public Texture[]    skins;
+
+    private PlayerDataScript playerData;
+
     // Start is called before the first frame update
     void Start()
     {
         myGameManager = GameObject.Find("GameManager").GetComponent<MyGameManager>();
+        playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         myRB = GetComponent<Rigidbody>();
         canDrive = true;
         activeTireMarkLeft.SetActive(false);
         activeTireMarkRight.SetActive(false);
+        myMaterial.mainTexture = skins[playerData.activeCar];
     }
 
     // Update is called once per frame

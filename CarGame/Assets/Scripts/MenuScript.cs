@@ -15,6 +15,8 @@ public class MenuScript : MonoBehaviour
     public GameObject levelPrompt2;
     public GameObject levelPrompt3;
 
+    public GameObject[] carSymbols;
+
     public Text playerNameText;
     public Text levelNameText;
     //public Text playerMoneyText;
@@ -36,6 +38,7 @@ public class MenuScript : MonoBehaviour
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         //playerMoneyText.text = playerData.money.ToString();
         myStatsMenu.SetActive(false);
+
     }
 
     // Update is called once per frame
