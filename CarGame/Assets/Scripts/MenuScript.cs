@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
+    public GameObject logo;
+    public GameObject settingsMenu;
     public GameObject mycarMenu;
     public GameObject myStatsMenu;
     public GameObject levelMenu;
@@ -28,6 +30,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        settingsMenu.SetActive(false);
         mycarMenu.SetActive(false);
         levelMenu.SetActive(false);
         levelMenuCloseButton.SetActive(false);
@@ -38,7 +41,6 @@ public class MenuScript : MonoBehaviour
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         //playerMoneyText.text = playerData.money.ToString();
         myStatsMenu.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -50,6 +52,21 @@ public class MenuScript : MonoBehaviour
     public void QuickRace(int levelNumber)
     {
         StartCoroutine(StartRace(levelNumber));
+    }
+
+    public void Settings()
+    {
+        if(!settingsMenu.activeSelf)
+        {
+            logo.SetActive(false);
+            settingsMenu.SetActive(true);
+        }
+
+        else if (settingsMenu.activeSelf)
+        {
+            logo.SetActive(true);
+            settingsMenu.SetActive(false);
+        }
     }
 
     public void Cars()

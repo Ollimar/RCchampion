@@ -93,6 +93,7 @@ public class ScriptGashapon : MonoBehaviour
         newCarID = Random.Range(0, cars.Length);
         newCar = cars[newCarID];
         cars[newCarID].SetActive(true);
+        cars[newCarID].GetComponent<Rigidbody>().AddForce(Vector3.up*-1000f);
         yield return new WaitForSeconds(1f);
         newCarWindow.SetActive(true);
         accepCarButton.SetActive(true);
