@@ -26,6 +26,7 @@ public class MyGameManager : MonoBehaviour
     public bool raceOn = false;
     public bool resultsOn = true;
     public bool levelChangeOn = false;
+    public bool pauseOn = false;
 
     // variables for UI Elements
     public Text             startCountDownText;
@@ -42,6 +43,7 @@ public class MyGameManager : MonoBehaviour
     public Text             lap3TimeText;
     public GameObject       playerExpMeter;
     public GameObject[]     stars;
+    public GameObject       pauseMenu;
 
     // Player Data that persists between scenes
     public PlayerDataScript playerData;
@@ -64,6 +66,7 @@ public class MyGameManager : MonoBehaviour
         playerLevelUpText       = GameObject.Find("TextLevelUp");
         playerCoins             = GameObject.Find("PlayerCoins");
         playerDataPanel         = GameObject.Find("PlayerDataUpdatePanel");
+        pauseMenu               = GameObject.Find("PausePanel");
 
         for (int i = 0; i<stars.Length;i++)
         {
@@ -79,6 +82,7 @@ public class MyGameManager : MonoBehaviour
         finishPanel.SetActive(false);
         startCountDownText.gameObject.SetActive(false);
         playerExpMeter.SetActive(false);
+        pauseMenu.SetActive(false);
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         playerNameText.text = playerData.playerName;
         StartCoroutine("StartRace");
@@ -164,7 +168,7 @@ public class MyGameManager : MonoBehaviour
             currentLapTime += Time.deltaTime;
         }
 
-        else if(raceOn == false && lap >3 && resultsOn)
+        else if (raceOn == false && lap >3 && resultsOn)
         {
             finishPanel.SetActive(true);
 
@@ -196,6 +200,23 @@ public class MyGameManager : MonoBehaviour
             }
 
         }
+
+        if (pauseOn)
+        {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+        }
+
+        else if (!pauseOn)
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void Pause()
+    {
+        pauseOn = !pauseOn;
     }
 
     public void CloseResults()
@@ -223,6 +244,7 @@ public class MyGameManager : MonoBehaviour
             //playerData.playerExp = 0f;
         }
         SceneManager.LoadScene("MenuLevel");
+        Time.timeScale = 1f;
     }
 
     public IEnumerator CountDownOff()

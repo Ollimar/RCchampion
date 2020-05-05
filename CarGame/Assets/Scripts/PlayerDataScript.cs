@@ -27,6 +27,7 @@ public class PlayerDataScript : MonoBehaviour
 
     public int          activeCar;
 
+    public float musicVolume = 100f;
 
 
     // Start is called before the first frame update
@@ -46,10 +47,16 @@ public class PlayerDataScript : MonoBehaviour
                 track3RecordText.text = "BEST TIME: " + track3Record.ToString();
             }
         }
+
         else if(playerData != this)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void MusicVolume(float musicVolume)
+    {
+        playerData.GetComponent<AudioSource>().volume = musicVolume;
     }
 
     // Update is called once per frame
