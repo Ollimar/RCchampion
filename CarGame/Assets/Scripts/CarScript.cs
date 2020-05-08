@@ -54,8 +54,10 @@ public class CarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(myGameManager.raceOn)
+
+        if (myGameManager.raceOn)
         {
+            myRB.constraints = RigidbodyConstraints.FreezePositionY;
             carSpeed = Mathf.Lerp(myRB.velocity.z, accelerateSpeed, Time.time);
 
             if (drifting == false && activeTireMarkLeft.activeSelf)
@@ -92,6 +94,7 @@ public class CarScript : MonoBehaviour
 
 
             Accelerate(jsAccelerate.InputDirection.y);
+            //Accelerate(Input.GetAxis("Vertical"));
 
 
             if (crash)

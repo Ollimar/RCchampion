@@ -11,6 +11,10 @@ public class LevelsContainerScript : MonoBehaviour
     public Text track2RecordText;
     public Text track3RecordText;
 
+    public Image[] starsLevel1;
+    public Image[] starsLevel2;
+    public Image[] starsLevel3;
+
     public PlayerDataScript playerdata;
 
     // Start is called before the first frame update
@@ -24,6 +28,78 @@ public class LevelsContainerScript : MonoBehaviour
         track2RecordText.text = "BEST TIME: " + playerdata.track2Record.ToString("f2");
         playerdata.track3RecordText = track3RecordText;
         track3RecordText.text = "BEST TIME: " + playerdata.track3Record.ToString("f2");
+
+        for(int i=0; i<starsLevel1.Length; i++)
+        {
+            starsLevel1[i].GetComponent<Image>().enabled = false;
+        }
+
+        for (int i = 0; i < starsLevel2.Length; i++)
+        {
+            starsLevel2[i].GetComponent<Image>().enabled = false;
+        }
+
+        for (int i = 0; i < starsLevel3.Length; i++)
+        {
+            starsLevel3[i].GetComponent<Image>().enabled = false;
+        }
+
+        //Level 1 Stars
+
+        if(playerdata.track1Record < 12f)
+        {
+            starsLevel1[0].GetComponent<Image>().enabled = true;
+            starsLevel1[1].GetComponent<Image>().enabled = true;
+            starsLevel1[2].GetComponent<Image>().enabled = true;
+        }
+        else if (playerdata.track1Record < 20f)
+        {
+            starsLevel1[0].GetComponent<Image>().enabled = true;
+            starsLevel1[1].GetComponent<Image>().enabled = true;
+        }
+
+        else if (playerdata.track1Record < 25f)
+        {
+            starsLevel1[0].GetComponent<Image>().enabled = true;
+        }
+
+        //Level 2 Stars
+
+        if (playerdata.track2Record < 20f)
+        {
+            starsLevel2[0].GetComponent<Image>().enabled = true;
+            starsLevel2[1].GetComponent<Image>().enabled = true;
+            starsLevel2[2].GetComponent<Image>().enabled = true;
+        }
+        else if (playerdata.track1Record < 25f)
+        {
+            starsLevel2[0].GetComponent<Image>().enabled = true;
+            starsLevel2[1].GetComponent<Image>().enabled = true;
+        }
+
+        else if (playerdata.track1Record < 40f)
+        {
+            starsLevel2[0].GetComponent<Image>().enabled = true;
+        }
+
+        //Level 3 Stars
+
+        if (playerdata.track2Record < 25f)
+        {
+            starsLevel3[0].GetComponent<Image>().enabled = true;
+            starsLevel3[1].GetComponent<Image>().enabled = true;
+            starsLevel3[2].GetComponent<Image>().enabled = true;
+        }
+        else if (playerdata.track1Record < 35f)
+        {
+            starsLevel3[0].GetComponent<Image>().enabled = true;
+            starsLevel3[1].GetComponent<Image>().enabled = true;
+        }
+
+        else if (playerdata.track1Record < 40f)
+        {
+            starsLevel3[0].GetComponent<Image>().enabled = true;
+        }
     }
 
     // Update is called once per frame

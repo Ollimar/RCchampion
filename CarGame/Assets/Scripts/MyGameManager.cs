@@ -41,6 +41,7 @@ public class MyGameManager : MonoBehaviour
     public Text             lap1TimeText;
     public Text             lap2TimeText;
     public Text             lap3TimeText;
+    public Text             totalTimeText;
     public GameObject       playerExpMeter;
     public GameObject[]     stars;
     public GameObject       pauseMenu;
@@ -50,6 +51,12 @@ public class MyGameManager : MonoBehaviour
 
     // Track specific data for records
     public Trackdata        trackDataScript;
+
+    //AduiClips
+    public AudioClip        buttonPressed;
+    public AudioClip        star1Get;
+    public AudioClip        star2Get;
+    public AudioClip        star3Get;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +68,7 @@ public class MyGameManager : MonoBehaviour
         lap1TimeText            = GameObject.Find("Lap1TimeText").GetComponent<Text>();
         lap2TimeText            = GameObject.Find("Lap2TimeText").GetComponent<Text>();
         lap3TimeText            = GameObject.Find("Lap3TimeText").GetComponent<Text>();
+        totalTimeText           = GameObject.Find("TotalTimeText").GetComponent<Text>();
         finishPanel             = GameObject.Find("FinishPanel");
         playerExpMeter          = GameObject.Find("PlayerExpMeter");
         playerLevelUpText       = GameObject.Find("TextLevelUp");
@@ -175,8 +183,9 @@ public class MyGameManager : MonoBehaviour
             lap1TimeText.GetComponent<Text>().text = "LAP1: "+ lapTime[0].ToString();
             lap2TimeText.GetComponent<Text>().text = "LAP2: "+ lapTime[1].ToString();
             lap3TimeText.GetComponent<Text>().text = "LAP3: "+ lapTime[2].ToString();
+            totalTimeText.GetComponent<Text>().text = "TOTAL: "+timer.ToString();
 
-            if(timer < currentTrack.GetComponent<Trackdata>().star3Time)
+            if (timer < currentTrack.GetComponent<Trackdata>().star3Time)
             {
                 StartCoroutine("StarGet3");
             }
@@ -198,7 +207,6 @@ public class MyGameManager : MonoBehaviour
                     currentTrack.GetComponent<Trackdata>().NewRecord(timer);
                 }
             }
-
         }
 
         if (pauseOn)
@@ -226,14 +234,15 @@ public class MyGameManager : MonoBehaviour
         StartCoroutine("ActivatePlayerData");
     }
 
-    public void Retry()
+    public void Retry(int levelNumber)
     {
+        GetComponent<AudioSource>().PlayOneShot(buttonPressed);
         if (playerExpMeter.GetComponent<Image>().fillAmount >= 1f)
         {
             playerExpMeter.GetComponent<Image>().fillAmount = 0f;
             //playerData.playerExp = 0f;
         }
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene(levelNumber);
     }
 
     public void Quit()
@@ -293,24 +302,30 @@ public class MyGameManager : MonoBehaviour
     public IEnumerator StarGet1()
     {
         yield return new WaitForSeconds(1f);
+        GetComponent<AudioSource>().PlayOneShot(star1Get);
         stars[0].SetActive(true);
     }
 
     public IEnumerator StarGet2()
     {
         yield return new WaitForSeconds(0.3f);
+        GetComponent<AudioSource>().PlayOneShot(star1Get);
         stars[0].SetActive(true);
         yield return new WaitForSeconds(0.3f);
+        GetComponent<AudioSource>().PlayOneShot(star2Get);
         stars[1].SetActive(true);
     }
 
     public IEnumerator StarGet3()
     {
         yield return new WaitForSeconds(0.3f);
+        GetComponent<AudioSource>().PlayOneShot(star1Get);
         stars[0].SetActive(true);
         yield return new WaitForSeconds(0.3f);
+        GetComponent<AudioSource>().PlayOneShot(star2Get);
         stars[1].SetActive(true);
         yield return new WaitForSeconds(0.3f);
+        GetComponent<AudioSource>().PlayOneShot(star3Get);
         stars[2].SetActive(true);
     }
 }

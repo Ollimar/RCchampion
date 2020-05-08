@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour
     public GameObject mycarMenu;
     public GameObject myStatsMenu;
     public GameObject levelMenu;
+    public string[]   levelNames;
     public GameObject levelMenuCloseButton;
     public GameObject carsMenuCloseButton;
     public GameObject levelPrompt1;
@@ -21,15 +22,23 @@ public class MenuScript : MonoBehaviour
 
     public Text playerNameText;
     public Text levelNameText;
+    public Text levelNameText2;
+    public Text levelNameText3;
     //public Text playerMoneyText;
 
     public PlayerDataScript playerData;
 
     public Animator fadeAnim;
 
+    // Button sounds
+    private AudioSource myAudio;
+    public  AudioClip   buttonSound1;
+    public  AudioClip   buttonCancel;
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         settingsMenu.SetActive(false);
         mycarMenu.SetActive(false);
         levelMenu.SetActive(false);
@@ -41,6 +50,7 @@ public class MenuScript : MonoBehaviour
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         //playerMoneyText.text = playerData.money.ToString();
         myStatsMenu.SetActive(false);
+        myAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -58,6 +68,7 @@ public class MenuScript : MonoBehaviour
     {
         if(!settingsMenu.activeSelf)
         {
+            myAudio.PlayOneShot(buttonSound1);
             logo.SetActive(false);
             settingsMenu.SetActive(true);
         }
@@ -75,6 +86,7 @@ public class MenuScript : MonoBehaviour
         {
             if(!myStatsMenu.activeSelf && !levelMenu.activeSelf)
             {
+                myAudio.PlayOneShot(buttonSound1);
                 mycarMenu.SetActive(true);
                 carsMenuCloseButton.SetActive(true);
             }           
@@ -93,6 +105,7 @@ public class MenuScript : MonoBehaviour
         {
             if(!mycarMenu.activeSelf && !levelMenu.activeSelf)
             {
+                myAudio.PlayOneShot(buttonSound1);
                 myStatsMenu.SetActive(true);
             }
             
@@ -110,7 +123,8 @@ public class MenuScript : MonoBehaviour
         if (!levelMenu.activeSelf)
         {
             if(!myStatsMenu.activeSelf && !mycarMenu.activeSelf)
-            {               
+            {
+                myAudio.PlayOneShot(buttonSound1);
                 levelMenu.SetActive(true);
                 levelMenuCloseButton.SetActive(true);
             }           
@@ -129,12 +143,14 @@ public class MenuScript : MonoBehaviour
         {
             if (!levelPrompt1.activeSelf)
             {
+                myAudio.PlayOneShot(buttonSound1);
                 levelPrompt1.SetActive(true);
-                levelNameText.text = "PLAY ?";
+                levelNameText.text = "PLAY "+ levelNames[0]+"?";
             }
 
             else if (levelPrompt1.activeSelf)
             {
+                myAudio.PlayOneShot(buttonCancel);
                 levelPrompt1.SetActive(false);
             }
         }
@@ -143,12 +159,14 @@ public class MenuScript : MonoBehaviour
         {
             if (!levelPrompt2.activeSelf)
             {
+                myAudio.PlayOneShot(buttonSound1);
                 levelPrompt2.SetActive(true);
-                levelNameText.text = "PLAY ?";
+                levelNameText2.text = "PLAY " + levelNames[1] + "?";
             }
 
             else if (levelPrompt2.activeSelf)
             {
+                myAudio.PlayOneShot(buttonCancel);
                 levelPrompt2.SetActive(false);
             }
         }
@@ -157,12 +175,14 @@ public class MenuScript : MonoBehaviour
         {
             if (!levelPrompt3.activeSelf)
             {
+                myAudio.PlayOneShot(buttonSound1);
                 levelPrompt3.SetActive(true);
-                levelNameText.text = "PLAY ?";
+                levelNameText3.text = "PLAY " + levelNames[2] + "?";
             }
 
             else if (levelPrompt3.activeSelf)
             {
+                myAudio.PlayOneShot(buttonCancel);
                 levelPrompt3.SetActive(false);
             }
         }
@@ -175,6 +195,7 @@ public class MenuScript : MonoBehaviour
 
     public IEnumerator StartRace(int level)
     {
+        myAudio.PlayOneShot(buttonSound1);
         fadeAnim.SetTrigger("Fade");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(level);
