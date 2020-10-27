@@ -8,6 +8,8 @@ public class CarButtonScript : MonoBehaviour
     public bool carLocked = true;
     public int carNumber;
 
+    public MenuScript menu;
+
     public Sprite carLockedImage;
     public Sprite carUnlockedImage;
 
@@ -17,8 +19,9 @@ public class CarButtonScript : MonoBehaviour
     void Start()
     {
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
+        menu = GameObject.Find("GameManager").GetComponent<MenuScript>();
 
-        if(playerData.carsOwned[carNumber] == true)
+        if (playerData.carsOwned[carNumber] == true)
         {
             carLocked = false;
         }
@@ -34,6 +37,7 @@ public class CarButtonScript : MonoBehaviour
         if(!carLocked)
         {
             playerData.activeCar = carNumber;
+            menu.Cars();
         }
 
     }

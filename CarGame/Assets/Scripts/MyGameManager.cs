@@ -52,7 +52,7 @@ public class MyGameManager : MonoBehaviour
     // Track specific data for records
     public Trackdata        trackDataScript;
 
-    //AduiClips
+    //AudioClips
     public AudioClip        buttonPressed;
     public AudioClip        star1Get;
     public AudioClip        star2Get;

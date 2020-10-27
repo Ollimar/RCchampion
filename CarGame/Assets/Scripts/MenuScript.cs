@@ -17,6 +17,9 @@ public class MenuScript : MonoBehaviour
     public GameObject levelPrompt1;
     public GameObject levelPrompt2;
     public GameObject levelPrompt3;
+    public GameObject levelPrompt4;
+
+    public Image      levelLocked4Image;
 
     public GameObject[] carSymbols;
 
@@ -24,6 +27,7 @@ public class MenuScript : MonoBehaviour
     public Text levelNameText;
     public Text levelNameText2;
     public Text levelNameText3;
+    public bool levelLocked1 = false, levelLocked2 = false, levelLocked3 = false, levelLocked4 = true;
     //public Text playerMoneyText;
 
     public PlayerDataScript playerData;
@@ -31,7 +35,7 @@ public class MenuScript : MonoBehaviour
     public Animator fadeAnim;
 
     // Button sounds
-    private AudioSource myAudio;
+    public  AudioSource myAudio;
     public  AudioClip   buttonSound1;
     public  AudioClip   buttonCancel;
 
@@ -47,10 +51,17 @@ public class MenuScript : MonoBehaviour
         levelPrompt1.SetActive(false);
         levelPrompt2.SetActive(false);
         levelPrompt3.SetActive(false);
+        levelPrompt4.SetActive(false);
         playerData = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
         //playerMoneyText.text = playerData.money.ToString();
         myStatsMenu.SetActive(false);
         myAudio = GetComponent<AudioSource>();
+
+        if(playerData.stars >= 6)
+        {
+            levelLocked4 = false;
+            levelLocked4Image.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -66,7 +77,7 @@ public class MenuScript : MonoBehaviour
 
     public void Settings()
     {
-        if(!settingsMenu.activeSelf)
+        if(!settingsMenu.activeSelf && !mycarMenu.activeSelf && !myStatsMenu.activeSelf && !levelMenu.activeSelf)
         {
             myAudio.PlayOneShot(buttonSound1);
             logo.SetActive(false);
@@ -82,7 +93,7 @@ public class MenuScript : MonoBehaviour
 
     public void Cars()
     {
-        if(!mycarMenu.activeSelf)
+        if(!settingsMenu.activeSelf && !mycarMenu.activeSelf && !myStatsMenu.activeSelf && !levelMenu.activeSelf)
         {
             if(!myStatsMenu.activeSelf && !levelMenu.activeSelf)
             {
@@ -101,7 +112,7 @@ public class MenuScript : MonoBehaviour
 
     public void Stats()
     {
-        if(!myStatsMenu.activeSelf)
+        if(!settingsMenu.activeSelf && !mycarMenu.activeSelf && !myStatsMenu.activeSelf && !levelMenu.activeSelf)
         {
             if(!mycarMenu.activeSelf && !levelMenu.activeSelf)
             {
@@ -120,7 +131,7 @@ public class MenuScript : MonoBehaviour
 
     public void Levels()
     {
-        if (!levelMenu.activeSelf)
+        if (!settingsMenu.activeSelf && !mycarMenu.activeSelf && !myStatsMenu.activeSelf && !levelMenu.activeSelf)
         {
             if(!myStatsMenu.activeSelf && !mycarMenu.activeSelf)
             {
@@ -139,7 +150,7 @@ public class MenuScript : MonoBehaviour
 
     public void OpenLevel(int levelNumber)
     {
-        if(levelNumber == 1)
+        if(levelNumber == 1 && !levelLocked1 && !levelPrompt2.activeSelf && !levelPrompt3.activeSelf && !levelPrompt4.activeSelf)
         {
             if (!levelPrompt1.activeSelf)
             {
@@ -155,7 +166,7 @@ public class MenuScript : MonoBehaviour
             }
         }
 
-        if (levelNumber == 2)
+        if (levelNumber == 2 && !levelLocked2 && !levelPrompt1.activeSelf && !levelPrompt3.activeSelf && !levelPrompt4.activeSelf)
         {
             if (!levelPrompt2.activeSelf)
             {
@@ -171,7 +182,7 @@ public class MenuScript : MonoBehaviour
             }
         }
 
-        if (levelNumber == 3)
+        if (levelNumber == 3 && !levelLocked3 && !levelPrompt1.activeSelf && !levelPrompt2.activeSelf && !levelPrompt4.activeSelf)
         {
             if (!levelPrompt3.activeSelf)
             {
@@ -184,6 +195,22 @@ public class MenuScript : MonoBehaviour
             {
                 myAudio.PlayOneShot(buttonCancel);
                 levelPrompt3.SetActive(false);
+            }
+        }
+
+        if (levelNumber == 4 && !levelLocked4 && !levelPrompt1.activeSelf && !levelPrompt2.activeSelf && !levelPrompt3.activeSelf)
+        {
+            if (!levelPrompt4.activeSelf)
+            {
+                myAudio.PlayOneShot(buttonSound1);
+                levelPrompt4.SetActive(true);
+                levelNameText3.text = "PLAY " + levelNames[4] + "?";
+            }
+
+            else if (levelPrompt4.activeSelf)
+            {
+                myAudio.PlayOneShot(buttonCancel);
+                levelPrompt4.SetActive(false);
             }
         }
     }

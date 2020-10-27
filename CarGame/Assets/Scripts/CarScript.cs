@@ -37,6 +37,10 @@ public class CarScript : MonoBehaviour
     public Material     myMaterial;
     public Texture[]    skins;
 
+    // Audio variables
+    private AudioSource myAudio;
+    public AudioClip bumpAudio;
+
     private PlayerDataScript playerData;
 
     // Start is called before the first frame update
@@ -49,11 +53,13 @@ public class CarScript : MonoBehaviour
         activeTireMarkLeft.SetActive(false);
         activeTireMarkRight.SetActive(false);
         myMaterial.mainTexture = skins[playerData.activeCar];
+        myAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float v = Input.GetAxis("Vertical");
 
         if (myGameManager.raceOn)
         {
@@ -92,9 +98,7 @@ public class CarScript : MonoBehaviour
                 drifting = false;
             }
 
-
             Accelerate(jsAccelerate.InputDirection.y);
-            //Accelerate(Input.GetAxis("Vertical"));
 
 
             if (crash)
@@ -157,6 +161,9 @@ public class CarScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Wall")
         {
+            myAudio.pitch = Random.Range(0.7f, 1.3f);
+            myAudio.PlayOneShot(bumpAudio);
+            //collision.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
             crash = true;
         }
     }

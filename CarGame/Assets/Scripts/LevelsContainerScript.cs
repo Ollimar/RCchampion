@@ -21,6 +21,7 @@ public class LevelsContainerScript : MonoBehaviour
     void Start()
     {
         playerdata = GameObject.Find("PlayerData").GetComponent<PlayerDataScript>();
+        playerdata.stars = 0;
 
         playerdata.track1RecordText = track1RecordText;
         track1RecordText.text = "BEST TIME: " + playerdata.track1Record.ToString("f2");
@@ -51,16 +52,19 @@ public class LevelsContainerScript : MonoBehaviour
             starsLevel1[0].GetComponent<Image>().enabled = true;
             starsLevel1[1].GetComponent<Image>().enabled = true;
             starsLevel1[2].GetComponent<Image>().enabled = true;
+            playerdata.stars += 3;
         }
         else if (playerdata.track1Record < 20f)
         {
             starsLevel1[0].GetComponent<Image>().enabled = true;
             starsLevel1[1].GetComponent<Image>().enabled = true;
+            playerdata.stars += 2;
         }
 
         else if (playerdata.track1Record < 25f)
         {
             starsLevel1[0].GetComponent<Image>().enabled = true;
+            playerdata.stars += 1;
         }
 
         //Level 2 Stars
@@ -70,35 +74,41 @@ public class LevelsContainerScript : MonoBehaviour
             starsLevel2[0].GetComponent<Image>().enabled = true;
             starsLevel2[1].GetComponent<Image>().enabled = true;
             starsLevel2[2].GetComponent<Image>().enabled = true;
+            playerdata.stars += 3;
         }
-        else if (playerdata.track1Record < 25f)
+        else if (playerdata.track2Record < 25f)
         {
             starsLevel2[0].GetComponent<Image>().enabled = true;
             starsLevel2[1].GetComponent<Image>().enabled = true;
+            playerdata.stars += 2;
         }
 
-        else if (playerdata.track1Record < 40f)
+        else if (playerdata.track2Record < 40f)
         {
             starsLevel2[0].GetComponent<Image>().enabled = true;
+            playerdata.stars += 1;
         }
 
         //Level 3 Stars
 
-        if (playerdata.track2Record < 25f)
+        if (playerdata.track3Record < 25f)
         {
             starsLevel3[0].GetComponent<Image>().enabled = true;
             starsLevel3[1].GetComponent<Image>().enabled = true;
             starsLevel3[2].GetComponent<Image>().enabled = true;
+            playerdata.stars += 3;
         }
-        else if (playerdata.track1Record < 35f)
+        else if (playerdata.track3Record < 35f)
         {
             starsLevel3[0].GetComponent<Image>().enabled = true;
             starsLevel3[1].GetComponent<Image>().enabled = true;
+            playerdata.stars += 2;
         }
 
-        else if (playerdata.track1Record < 40f)
+        else if (playerdata.track3Record < 40f)
         {
             starsLevel3[0].GetComponent<Image>().enabled = true;
+            playerdata.stars += 1;
         }
     }
 

@@ -19,6 +19,9 @@ public class PlayerDataScript : MonoBehaviour
     public float        track2Record = 60f;
     public float        track3Record = 60f;
 
+    // The number of stars player has collected
+    public int          stars;
+
     public Text         track1RecordText;
     public Text         track2RecordText;
     public Text         track3RecordText;
@@ -27,7 +30,8 @@ public class PlayerDataScript : MonoBehaviour
 
     public int          activeCar;
 
-    public float musicVolume = 100f;
+    public float musicVolume = 0.5f;
+    public Slider musicVolumeSlider;
 
 
     // Start is called before the first frame update
@@ -56,7 +60,7 @@ public class PlayerDataScript : MonoBehaviour
 
     public void MusicVolume(float musicVolume)
     {
-        playerData.GetComponent<AudioSource>().volume = musicVolume;
+        playerData.GetComponent<AudioSource>().volume = musicVolumeSlider.value;
     }
 
     // Update is called once per frame
