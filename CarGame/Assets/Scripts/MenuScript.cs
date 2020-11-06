@@ -27,6 +27,7 @@ public class MenuScript : MonoBehaviour
     public Text levelNameText;
     public Text levelNameText2;
     public Text levelNameText3;
+    public Text levelNameText4;
     public bool levelLocked1 = false, levelLocked2 = false, levelLocked3 = false, levelLocked4 = true;
     //public Text playerMoneyText;
 
@@ -204,7 +205,7 @@ public class MenuScript : MonoBehaviour
             {
                 myAudio.PlayOneShot(buttonSound1);
                 levelPrompt4.SetActive(true);
-                levelNameText3.text = "PLAY " + levelNames[4] + "?";
+                levelNameText4.text = "PLAY " + levelNames[3] + "?";
             }
 
             else if (levelPrompt4.activeSelf)

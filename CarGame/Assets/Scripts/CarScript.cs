@@ -32,14 +32,19 @@ public class CarScript : MonoBehaviour
     public GameObject activeTireMarkRight;
     public Transform tireMarkLeft;
 
+    public ParticleSystem neonBrake;
+
     public bool drifting = false;
 
     public Material     myMaterial;
     public Texture[]    skins;
+    public Material[]   materials;
+
+    public GameObject[] eyes;
 
     // Audio variables
     private AudioSource myAudio;
-    public AudioClip bumpAudio;
+    public AudioClip    bumpAudio;
 
     private PlayerDataScript playerData;
 
@@ -54,6 +59,17 @@ public class CarScript : MonoBehaviour
         activeTireMarkRight.SetActive(false);
         myMaterial.mainTexture = skins[playerData.activeCar];
         myAudio = GetComponent<AudioSource>();
+
+        for(int i=0; i<eyes.Length; i++)
+        {
+            eyes[i].GetComponent<Renderer>().material = materials[playerData.activeCar];
+        }
+
+        if(neonBrake != null)
+        {
+            var em = neonBrake.emission;
+            em.rateOverTime = 0f;
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +90,7 @@ public class CarScript : MonoBehaviour
                 newMark.transform.parent = transform;
                 activeTireMarkLeft = newMark;
                 activeTireMarkLeft.SetActive(false);
+                
             }
 
             else if (drifting == false && activeTireMarkRight.activeSelf)
@@ -84,6 +101,12 @@ public class CarScript : MonoBehaviour
                 newMark.transform.parent = transform;
                 activeTireMarkRight = newMark;
                 activeTireMarkRight.SetActive(false);
+
+                if (neonBrake != null)
+                {
+                    var em = neonBrake.emission;
+                    em.rateOverTime = 0f;
+                }
             }
 
             if (jsMovement.InputDirection.x != 0f)
@@ -91,6 +114,12 @@ public class CarScript : MonoBehaviour
                 drifting = true;
                 activeTireMarkLeft.SetActive(true);
                 activeTireMarkRight.SetActive(true);
+
+                if (neonBrake != null)
+                {
+                    var em = neonBrake.emission;
+                    em.rateOverTime = 10f;
+                }
             }
 
             else if (jsMovement.InputDirection.x == 0f)

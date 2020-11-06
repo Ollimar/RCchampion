@@ -18,6 +18,7 @@ public class PlayerDataScript : MonoBehaviour
     public float        track1Record = 60f;
     public float        track2Record = 60f;
     public float        track3Record = 60f;
+    public float        track4Record = 60f;
 
     // The number of stars player has collected
     public int          stars;
@@ -25,6 +26,7 @@ public class PlayerDataScript : MonoBehaviour
     public Text         track1RecordText;
     public Text         track2RecordText;
     public Text         track3RecordText;
+    public Text         track4RecordText;
 
     public bool[]       carsOwned;
 

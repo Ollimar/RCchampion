@@ -275,19 +275,19 @@ public class MyGameManager : MonoBehaviour
             if(timer < currentTrack.GetComponent<Trackdata>().star3Time)
             {
                 playerData.playerExp += 30f-playerData.playerLevel*0.05f;
-                playerData.newMoney = playerData.money + 50;
+                playerData.newMoney = playerData.money + 5;
             }
 
             else if (timer < currentTrack.GetComponent<Trackdata>().star2Time)
             {
                 playerData.playerExp += 20f - playerData.playerLevel * 0.05f;
-                playerData.newMoney = playerData.money + 20;
+                playerData.newMoney = playerData.money + 2;
             }
 
             else if (timer < currentTrack.GetComponent<Trackdata>().star1Time)
             {
                 playerData.playerExp += 10f - playerData.playerLevel * 0.05f;
-                playerData.newMoney = playerData.money + 10;
+                playerData.newMoney = playerData.money + 1;
             }
         }
     }

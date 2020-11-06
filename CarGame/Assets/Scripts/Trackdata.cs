@@ -25,6 +25,9 @@ public class Trackdata : MonoBehaviour
 
         switch (trackNumber)
         {
+            case 4:
+                totalRecord = playerData.track4Record;
+                break;
             case 3:
                 totalRecord = playerData.track3Record;
                 break;
@@ -41,6 +44,10 @@ public class Trackdata : MonoBehaviour
     {
         switch (trackNumber)
         {
+            case 4:
+                totalRecord = record;
+                playerData.track4Record = totalRecord;
+                break;
             case 3:
                 totalRecord = record;
                 playerData.track3Record = totalRecord;
